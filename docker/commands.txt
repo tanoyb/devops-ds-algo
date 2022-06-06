@@ -1,0 +1,26 @@
+docker images -a
+docker rmi $(docker images -a -q)
+docker images -f dangling=true
+docker image prune
+
+docker run redis
+docker ps
+docker ps -a
+docker ps -a -q
+docker stop id
+docker restart id
+docker rm id
+docker rm $(docker stop $(docker ps -q) )
+docker rm $(docker ps -a -q)
+docker inspect id
+docker logs id
+docker exec -it id sh/bash
+docker exec -it ee0f722c3c2c redis-cli
+docker run -it busybox sh
+
+docker build .
+docker build -t simpleweb . // adds tag to the image
+docker run -p 8080:8080 simpleweb //port outside container : port inside container
+[-p port in the local machine : port in the container]
+docker run -it simpleweb sh //check the files and folders inside a container
+
