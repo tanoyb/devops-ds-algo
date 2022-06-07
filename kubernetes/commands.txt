@@ -1,0 +1,67 @@
+kubectl
+minikube delete
+minikube start --driver=docker
+minikube start
+minikube stop
+minikube status
+kubectl get nodes
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+kubectl get deployments
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+minikube service hello-minikube --url
+kubectl delete services hello-minikube
+kubectl delete deployment hello-minikube
+kubectl get pods
+kubectl describe pod nginx
+kubectl get pods -o wide
+kubectl create -f pods.yml
+kubectl apply -f nginx.yaml
+kubectl describe pod newpods-9lrsh | grep -i image
+kubectl get pods webapp
+kubectl delete pod webapp
+kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml
+kubectl edit pod redis
+kubectl create -f replicaset.yaml
+kubectl get replicaset
+kubectl describe replicaset myapp-replicaset
+kubectl edit replicaset myapp-replicaset
+kubectl scale replicaset myapp-replicaset --replicas=2
+kubectl apply -f replicaset-definition-1.yaml
+kubectl delete replicaset replicaset-2
+kubectl create -f deployments.yaml
+kubectl describe deployment myapp-deployment
+kubectl get all
+
+---------------------------
+kubectl
+minikube delete
+minikube start --driver=docker
+minikube start
+minikube stop
+minikube status
+kubectl get nodes
+kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10
+kubectl get deployments
+kubectl expose deployment hello-minikube --type=NodePort --port=8080
+minikube service hello-minikube --url
+kubectl delete services hello-minikube
+kubectl delete deployment hello-minikube
+kubectl get pods
+kubectl describe pod nginx
+kubectl get pods -o wide
+kubectl create -f pods.yml
+kubectl apply -f nginx.yaml
+kubectl describe pod newpods-9lrsh | grep -i image
+kubectl get pods webapp
+kubectl delete pod webapp
+kubectl run redis --image=redis123 --dry-run=client -o yaml > pod.yaml
+kubectl edit pod redis
+kubectl create -f replicaset.yaml
+kubectl get replicaset
+kubectl describe replicaset myapp-replicaset
+kubectl edit replicaset myapp-replicaset
+kubectl scale replicaset myapp-replicaset --replicas=2
+kubectl apply -f replicaset-definition-1.yaml
+kubectl delete replicaset replicaset-2
+kubectl create -f deployments.yaml
+-------------

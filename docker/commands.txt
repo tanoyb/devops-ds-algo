@@ -23,4 +23,9 @@ docker build -t simpleweb . // adds tag to the image
 docker run -p 8080:8080 simpleweb //port outside container : port inside container
 [-p port in the local machine : port in the container]
 docker run -it simpleweb sh //check the files and folders inside a container
+docker-compose up
+docker-compose up --build //build with fresh changes
+docker-compose down - remove all containers
+docker-compose up --build -d
+docker-compose ps
 
