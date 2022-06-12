@@ -28,4 +28,5 @@ docker-compose up --build //build with fresh changes
 docker-compose down - remove all containers
 docker-compose up --build -d
 docker-compose ps
-
+docker build -f Dockerfile.dev .
+docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app  6b6cf96b65b1

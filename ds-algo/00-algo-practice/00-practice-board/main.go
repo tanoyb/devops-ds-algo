@@ -1,3 +1,8 @@
 package main
 
-func main() {}
+type Node struct {
+}
+
+func main() {
+
+}
