@@ -30,3 +30,4 @@ docker-compose up --build -d
 docker-compose ps
 docker build -f Dockerfile.dev .
 docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app  6b6cf96b65b1
+docker exec -it 6b6cf96b65b1 npm run tests // runs external command on the containerm overwrite default dockerfile command
