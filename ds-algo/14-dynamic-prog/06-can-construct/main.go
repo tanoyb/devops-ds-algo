@@ -42,7 +42,7 @@ func canConstructDP(targetStr string, wordBank []string) bool {
 		isPreFix := strings.HasPrefix(targetStr, word)
 		if isPreFix == true {
 			suffix := strings.TrimPrefix(targetStr, word)
-			if canConstruct(suffix, wordBank) == true {
+			if canConstructDP(suffix, wordBank) == true {
 				memo[targetStr] = true
 				return memo[targetStr]
 			}
