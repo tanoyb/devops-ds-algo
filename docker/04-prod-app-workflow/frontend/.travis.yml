@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t samplereact -f Dockerfile.dev .
+
+# -- --coverage is added to exit the process after running the tests
+script:
+  - docker run samplereact npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-west-2"
+  app: "docker-react"
+  env: "Docker-env"
+  bucket_name: "elasticbeanstalk-us-west-2-306476627547"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY

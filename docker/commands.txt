@@ -33,3 +33,6 @@ docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app  6b6cf96b65b1
 docker exec -it 6b6cf96b65b1 npm run tests // runs external command on the containerm overwrite default dockerfile command
 docker run -p 3000:3000 -v /app/node_modules  -v $(pwd):/app c83f6a16ae17
 docker attach 1f5df4d2509e
+docker-compose -f docker-compose-dev.yml up
+docker-compose -f docker-compose-dev.yml up --build
+docker-compose -f docker-compose-dev.yml down
