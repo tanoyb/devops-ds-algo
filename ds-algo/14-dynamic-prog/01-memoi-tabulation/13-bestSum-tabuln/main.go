@@ -2,7 +2,9 @@ package main
 
 import "fmt"
 
-func howSum(targetSum int, arr []int) []int {
+//https://www.youtube.com/watch?v=oBt53YbR9Kk&t=14890s
+
+func bestSum(targetSum int, numbers []int) []int {
 	table := make([][]int, targetSum+1)
 	for i, _ := range table {
 		table[i] = nil
@@ -11,11 +13,18 @@ func howSum(targetSum int, arr []int) []int {
 	for i := 0; i <= len(table)-1; i++ {
 		//fmt.Println("for main i=", i)
 		if table[i] != nil {
-			for j := 0; j < len(arr); j++ {
+			for j := 0; j < len(numbers); j++ {
 				//fmt.Println("for sub j=", j)
 				//fmt.Println("for cond i+arr[j] = ", i+arr[j], " and len table=", len(table))
-				if i+arr[j] <= len(table)-1 {
-					table[i+arr[j]] = mergeArr(table[i], arr[j])
+				if i+numbers[j] <= len(table)-1 {
+					//fmt.Println("==current arr = ", table[i+numbers[j]])
+					//fmt.Println("==arr to merge=", mergeArr(table[i], numbers[j]))
+					combination := mergeArr(table[i], numbers[j])
+					if table[i+numbers[j]] == nil || len(table[i+numbers[j]]) > len(combination) {
+
+						table[i+numbers[j]] = combination
+					}
+
 				}
 			}
 			fmt.Println("table=", table)
@@ -33,6 +42,6 @@ func mergeArr(arr1 []int, n int) []int {
 
 func main() {
 
-	fmt.Println("======", howSum(7, []int{5, 3, 4}))
-	fmt.Println("=======", howSum(7, []int{5, 4, 2}))
+	fmt.Println("======", bestSum(8, []int{2, 3, 5}))
+	//fmt.Println("=======", howSum(7, []int{5, 4, 2}))
 }
