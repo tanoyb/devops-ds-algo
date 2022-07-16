@@ -55,11 +55,9 @@ func insertRecursive(p *Node, key int) *Node {
 		p.left = insertRecursive(p.left, key)
 	} else if key > p.data {
 		p.right = insertRecursive(p.right, key)
-	} else {
-		return p
 	}
 
-	return nil
+	return p
 }
 
 func deleteRecursive(p *Node, key int) *Node {

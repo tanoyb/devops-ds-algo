@@ -47,7 +47,7 @@ func insertNode(key int) { //iterative insert
 	}
 }
 
-func InsertRecursive(node *Node, key int) *Node {
+func InsertRecursive(node *Node, key int) *Node { //this is correct
 	if node == nil {
 		temp := &Node{data: key}
 		return temp
