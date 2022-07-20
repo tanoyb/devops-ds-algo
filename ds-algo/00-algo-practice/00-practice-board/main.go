@@ -69,6 +69,76 @@ func myPrintTreeRecursive(w io.Writer, node *Node, space int, child string) {
 	}
 }
 
+func heightOfSubtree(p *Node) int {
+	if p == nil {
+		return 0
+	}
+	heightLeft := heightOfSubtree(p.left)
+	heightRight := heightOfSubtree(p.right)
+	if heightLeft > heightRight {
+		return heightLeft + 1
+	} else {
+		return heightRight + 1
+	}
+}
+
+func inorderPredecessor(node *Node) *Node {
+
+	if node == nil {
+		return nil
+	}
+	for node != nil && node.right != nil {
+		node = node.right
+	}
+
+	return node
+}
+
+func inorderSuccessor(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	for node != nil && node.left != nil {
+		node = node.left
+	}
+
+	return node
+}
+
+func deleteRecursive(p *Node, key int) *Node {
+	if p == nil {
+		return nil
+	}
+	if p.left == nil && p.right == nil {
+		if p == root {
+			root = nil
+		}
+		p = nil
+		return nil
+	}
+
+	if key < p.data {
+		p.left = deleteRecursive(p.left, key)
+	} else if key > p.data {
+		p.right = deleteRecursive(p.right, key)
+	} else {
+		//the element has found
+		if heightOfSubtree(p.left) > heightOfSubtree(p.right) {
+			//find inorder predecessor
+			inPre := inorderPredecessor(p.left)
+			p.data = inPre.data
+			p.left = deleteRecursive(p.left, inPre.data)
+		} else {
+			inSucc := inorderSuccessor(p.right)
+			p.data = inSucc.data
+			p.right = deleteRecursive(p.right, inSucc.data)
+		}
+
+	}
+
+	return p
+}
+
 func main() {
 	// insertIterative(50)
 	// insertIterative(40)

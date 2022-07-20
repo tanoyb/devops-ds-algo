@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 //when deleting from a BST,
-//first search for the element, id found then delete
+//first search for the element, if found then delete
 //if the found node is a leaf node, then delete is easy
 //if the found node has  one child, move that child to the
 //parent of that deleted node

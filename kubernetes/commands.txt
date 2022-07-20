@@ -64,4 +64,5 @@ kubectl scale replicaset myapp-replicaset --replicas=2
 kubectl apply -f replicaset-definition-1.yaml
 kubectl delete replicaset replicaset-2
 kubectl create -f deployments.yaml
+minikube ip
 -------------
