@@ -66,3 +66,9 @@ kubectl delete replicaset replicaset-2
 kubectl create -f deployments.yaml
 minikube ip
 -------------
+kubectl delete -f client-pod.yaml
+kubectl apply -f client-deployment.yaml
+kubectl get pods -o wide
+kubectl set image deployment/client-deployment client=stephengrider/multi-client:v5 //update the image version of pod/container
+eval $(minikube docker-env) //command to point to the k8s VM docker server instead of local docker server
+kubectl logs pod-name //get the pod name from get pods command
