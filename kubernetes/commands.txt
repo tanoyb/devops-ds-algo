@@ -72,3 +72,5 @@ kubectl get pods -o wide
 kubectl set image deployment/client-deployment client=stephengrider/multi-client:v5 //update the image version of pod/container
 eval $(minikube docker-env) //command to point to the k8s VM docker server instead of local docker server
 kubectl logs pod-name //get the pod name from get pods command
+kubectl delete service client-node-port
+kubectl apply -f k8s(foldername) // to apply all the config file inside k8s folder at one go
