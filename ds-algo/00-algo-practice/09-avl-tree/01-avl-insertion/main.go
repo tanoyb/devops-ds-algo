@@ -38,8 +38,10 @@ func InsertRecursive(node *Node, key int) *Node {
 		return LR_Rotation(node)
 	} else if BalanceFactor(node) == -2 && BalanceFactor(node.right) == -1 {
 		//imbalance on right and then right, perform RR roation
+		return RR_Rotation(node)
 	} else if BalanceFactor(node) == -2 && BalanceFactor(node.right) == 1 {
 		//imbalance on right and then left, perform RL rotation
+		return RL_Rotation(node)
 	}
 
 	return node
@@ -77,6 +79,47 @@ func LL_Rotation(node *Node) *Node {
 		root = nodeL
 	}
 	return nodeL
+}
+
+func RL_Rotation(node *Node) *Node {
+
+	nodeR := node.right
+	nodeRthenL := nodeR.left
+
+	nodeR.left = nodeRthenL.right
+	node.right = nodeRthenL.left
+
+	nodeRthenL.right = nodeR
+	nodeRthenL.left = node
+	//update height
+	nodeR.heightOfSubtree = GenNodeHeight(nodeR)
+	node.heightOfSubtree = GenNodeHeight(node)
+	nodeRthenL.heightOfSubtree = GenNodeHeight(nodeRthenL)
+	//update root
+	if root == node {
+		root = nodeRthenL
+	}
+	return nodeRthenL
+
+}
+
+func RR_Rotation(node *Node) *Node {
+	nodeR := node.right
+	nodeRthenL := nodeR.left
+
+	nodeR.left = node
+	node.right = nodeRthenL
+
+	//update height
+	node.heightOfSubtree = GenNodeHeight(node)
+	nodeR.heightOfSubtree = GenNodeHeight(nodeR)
+
+	//update root
+	if root == node {
+		root = nodeR
+	}
+	return nodeR
+
 }
 
 func BalanceFactor(node *Node) int {
@@ -118,13 +161,38 @@ func PrintTree(w io.Writer, node *Node, space int, str string) {
 	}
 }
 
+func inorderPredecessor(node *Node) *Node {
+
+	if node == nil {
+		return nil
+	}
+	for node != nil && node.right != nil {
+		node = node.right
+	}
+
+	return node
+}
+
+func inorderSuccessor(node *Node) *Node {
+	if node == nil {
+		return nil
+	}
+	for node != nil && node.left != nil {
+		node = node.left
+	}
+
+	return node
+}
 func main() {
 	// root = InsertRecursive(root, 10)
 	// InsertRecursive(root, 5)
 	// InsertRecursive(root, 2)
-	root = InsertRecursive(root, 50)
-	InsertRecursive(root, 10)
-	InsertRecursive(root, 20)
+	root = InsertRecursive(root, 10)
+	a := []int{20, 30, 25, 28, 27, 5}
+	for _, v := range a {
+		InsertRecursive(root, v)
+	}
 
 	PrintTree(os.Stdout, root, 0, "Root")
+
 }
