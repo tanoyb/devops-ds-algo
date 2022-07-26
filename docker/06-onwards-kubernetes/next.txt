@@ -1,0 +1,1 @@
+Please go to kubernetes/05-complex for the multi container kubernetes app prod deployment
