@@ -74,3 +74,9 @@ eval $(minikube docker-env) //command to point to the k8s VM docker server inste
 kubectl logs pod-name //get the pod name from get pods command
 kubectl delete service client-node-port
 kubectl apply -f k8s(foldername) // to apply all the config file inside k8s folder at one go
+kubectl get storageclass
+kubectl describe storageclass
+kubectl get pv
+kubectl get pvc
+kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
+kubectl get secrets
