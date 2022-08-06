@@ -31,6 +31,8 @@ kubectl delete replicaset replicaset-2
 kubectl create -f deployments.yaml
 kubectl describe deployment myapp-deployment
 kubectl get all
+kubectl rollout status deployment.apps/myapp-deployment
+kubectl rollout undo deployment/myapp-deployment
 
 ---------------------------
 kubectl
@@ -65,6 +67,7 @@ kubectl apply -f replicaset-definition-1.yaml
 kubectl delete replicaset replicaset-2
 kubectl create -f deployments.yaml
 minikube ip
+minikube dashboard
 -------------
 kubectl delete -f client-pod.yaml
 kubectl apply -f client-deployment.yaml
@@ -80,3 +83,7 @@ kubectl get pv
 kubectl get pvc
 kubectl create secret generic pgpassword --from-literal PGPASSWORD=12345asdf
 kubectl get secrets
+------------
+kubectl delete all --all
+kubectl get all
+kubectl create deployment --help
