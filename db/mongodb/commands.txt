@@ -1,0 +1,56 @@
+mongosh //starts server
+mongod
+mongo // starts shell terminal
+show dbs
+use any_db_name //switches to db but does not create the db until we start inserting into it
+db.flightData.insertOne({
+    "departureAirport": "MUC",
+    "arrivalAirport": "SFO",
+    "aircraft": "Airbus A380",
+    "distance": 12000,
+    "intercontinental": true
+  }) // uses the selected db flights, and crates a collection called flightData implicitely and inserts a document into it
+  db.flightData.insertOne({
+    departureAirport: "MUC",
+    arrivalAirport: "SFO",
+    aircraft: "Airbus A380",
+    distance: 12000
+  })
+  cls
+  db.flightData.find().pretty() //fetches all the data prettified
+db.flightData.insertOne({     departureAirport: "MUC",     arrivalAirport: "SFO",     aircraft: "Airbus A380",    intercontinental: true, _id:"custom_id_1"   })
+db.flightData.deleteOne({departureAirport:"MUC"})//deletes one revord where it matches the passed filter, we can pass _id and other filter values as well
+db.flightData.deleteMany({departureAirport:"MUC"}) //
+db.flightData.updateOne({departureAirport:"MUC"}, {$set:{isDeleted: true}})
+db.flightData.updateMany({}, {$set:{isDeleted: true}})
+db.flightData.deleteMany({intercontinental:true})
+db.flightData.insertMany([
+  {
+    "departureAirport": "MUC",
+    "arrivalAirport": "SFO",
+    "aircraft": "Airbus A380",
+    "distance": 12000,
+    "intercontinental": true
+  },
+  {
+    "departureAirport": "LHR",
+    "arrivalAirport": "TXL",
+    "aircraft": "Airbus A320",
+    "distance": 950,
+    "intercontinental": false
+  }
+])
+db.flightData.find({intercontinental : true})
+db.flightData.find({distance : {$gt:10000}}) //greater than 10000 distance
+db.flightData.updateOne({_id: ObjectId("62fbc2b8515f813dfa3bca98")},{$set:{delayed: true}})
+db.flightData.update({_id: ObjectId("62fbc2b8515f813dfa3bca98")},{$set:{delayed: false}})
+db.flightData.update({_id: ObjectId("62fbc2b8515f813dfa3bca98")},{delayed: true}) //replace the existing document in the collection with this single value
+db.passengers.insertMany([ {}, {}, {}, {}])//include data inside the function
+db.passengers.find().toArray()
+db.passengers.find({}, {name : 1}).pretty()
+db.passengers.find({}, {name : 1, _id: 0}).pretty()
+db.flightData.updateMany({}, {$set:{status: {desc : "on time", updated_at : "1 hour ago"} }})
+db.passengers.updateOne({_id: ObjectId("62fbdb7a515f813dfa3bca9a") }, {$set: {hobbies: ["sports", "cooking"] }})
+db.flightData.find({"status.desc" : "on time"}) // find using the properties of the nested documents
+db.dropDatabase() //drop db
+db.myCollection.drop() //drop collection
