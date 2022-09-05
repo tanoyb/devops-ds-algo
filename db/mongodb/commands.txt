@@ -54,3 +54,14 @@ db.passengers.updateOne({_id: ObjectId("62fbdb7a515f813dfa3bca9a") }, {$set: {ho
 db.flightData.find({"status.desc" : "on time"}) // find using the properties of the nested documents
 db.dropDatabase() //drop db
 db.myCollection.drop() //drop collection
+db.stats() //return db related data
+typeof db.collection.findOne().property_name //returns the data type of the property_name
+
+---reference relations----
+use hospitals
+db.patients.insertOne({name: "max", age: 30, summary: "summary-max-1"})
+db.summaries.insertOne({_id: "summary-max-1", diseases : ["cold", "broken leg"]})
+db.patients.findOne().summary
+var dsid=db.patients.findOne().summary
+db.summaries.findOne({_id:"summary-max-1"}) //using the summary id to get the summary details
+=> nested/embedded document VS references 
