@@ -65,3 +65,45 @@ db.patients.findOne().summary
 var dsid=db.patients.findOne().summary
 db.summaries.findOne({_id:"summary-max-1"}) //using the summary id to get the summary details
 => nested/embedded document VS references 
+db.books.aggregate([{$lookup: {from: "authors", localField: "authors", foreignField: "_id", as: "creator"}}]) //aggregates/joins data from authors collection using matching _id in a single response
+//schema validation for posts collection
+db.createCollection("posts", {
+  validator: {
+    $jsonSchema: { 
+      bsonType: "object", 
+      required: ["title", "text", "creator", "comments"], 
+      properties:{
+        title:{
+          bsonType:   "string",
+          description : "must be a string"
+        },
+        text: {
+          bsonType: "string",
+          description: "must be a string"
+        },
+        creator:{
+          bsonType: "objectId",
+          description: "an object id must be"
+        },
+        commants: {
+          bsonType: "array",
+          description : "must be an array",
+          items: {
+            bsonType: "object",
+            required: ["text", "author"]
+            properties: {
+              text:{
+                bsonType: "string",
+                description : "must be a string"
+              },
+              author : {
+                bsonType : "objectId",
+                description : "must be an object id"
+              }
+            }
+          }
+        }
+      } 
+    }
+  }
+})
