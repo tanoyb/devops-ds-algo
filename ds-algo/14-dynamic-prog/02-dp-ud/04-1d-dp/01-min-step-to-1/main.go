@@ -30,6 +30,36 @@ func reachToOne(n int) int {
 	//return int(math.Min(float64(a), math.Min(float64(b), float64(c))))
 }
 
+//tabulation
+
+func reachToOneTabuln(N int) int {
+	dp := make([]int, N+1)
+
+	dp[0] = 0
+	dp[1] = 0
+	dp[2] = 1
+	dp[3] = 1
+
+	for i := 4; i <= N; i++ {
+		a := 9999999999999999
+		b := 99999999999999999
+		c := 99999999999999999
+
+		if i%3 == 0 {
+			a = 1 + dp[i/3]
+		}
+
+		if i%2 == 0 {
+			b = 1 + dp[i/2]
+		}
+
+		c = 1 + dp[i-1]
+		dp[i] = int(math.Min(float64(a), math.Min(float64(b), float64(c))))
+	}
+
+	return dp[N]
+}
+
 func main() {
 	fmt.Println(reachToOne(5000))
 }
