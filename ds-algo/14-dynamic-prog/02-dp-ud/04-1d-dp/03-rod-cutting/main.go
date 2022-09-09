@@ -6,6 +6,7 @@ import "fmt"
 var price = []int{0, 1, 3, 4, 5, 7, 9, 10, 11}
 
 //max piece of the rod 8
+//add memoization
 
 func solRodcutting(lengthOfPiece int) int {
 	if lengthOfPiece == 0 {
