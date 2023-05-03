@@ -20,7 +20,7 @@ func solveNQueen(numOfRow int, board [][]int, currentRow int) bool {
 
 	//recurence relation/recursive case
 	//try to place a queen in every row
-	// i is the current row, so j is the columns of the row i
+	// j is the columns of the row currentRow
 	for j := 0; j < numOfRow; j++ {
 		if canPlaceAQueen(board, numOfRow, currentRow, j) {
 			//fill the position
@@ -40,18 +40,18 @@ func solveNQueen(numOfRow int, board [][]int, currentRow int) bool {
 	return false
 }
 
-func canPlaceAQueen(board [][]int, numOfRows, x, y int) bool {
+func canPlaceAQueen(board [][]int, numOfRows, currentRow, currentColumn int) bool {
 	//A queen moves left, right and diagonally, along those directions, there should be no other queens
 	//column check
-	for k := 0; k < x; k++ {
-		if board[k][y] == 1 {
+	for k := 0; k < currentRow; k++ {
+		if board[k][currentColumn] == 1 {
 			return false
 		}
 	}
 
 	//left diagonal
-	i := x
-	j := y
+	i := currentRow
+	j := currentColumn
 	for i >= 0 && j >= 0 {
 		if board[i][j] == 1 {
 			return false
@@ -62,8 +62,8 @@ func canPlaceAQueen(board [][]int, numOfRows, x, y int) bool {
 
 	//right diagonal
 
-	i = x
-	j = y
+	i = currentRow
+	j = currentColumn
 	for i >= 0 && j < numOfRows {
 		if board[i][j] == 1 {
 			return false
@@ -78,3 +78,83 @@ func main() {
 	fmt.Println(solveNQueen(4, board, 0))
 
 }
+
+//===========alternate code below
+/*
+package main
+
+import "fmt"
+
+var board [][]int = [][]int{
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+	{0, 0, 0, 0},
+}
+
+func solveNQueen(numRows int, currentRow int) bool {
+	if currentRow == numRows {
+		fmt.Println(board)
+		return true
+	}
+
+	//iterate over the rows start from row 0 = current row
+	for i := 0; i < numRows; i++ {
+		if canPlaceAQueen(numRows, currentRow, i) {
+			board[currentRow][i] = 1
+			success := solveNQueen(numRows, currentRow+1)
+			if success {
+				return true
+			}
+			board[currentRow][i] = 0
+		}
+	}
+
+	return false
+}
+
+func canPlaceAQueen(numOfRows, currentRow, currentColumn int) bool {
+	//A queen moves left, right and diagonally, along those directions, there should be no other queens
+	//column check
+	for k := 0; k < currentRow; k++ {
+		if board[k][currentColumn] == 1 {
+			return false
+		}
+	}
+
+	//left diagonal
+	i := currentRow
+	j := currentColumn
+	for i >= 0 && j >= 0 {
+		if board[i][j] == 1 {
+			return false
+		}
+		i--
+		j--
+	}
+
+	//right diagonal
+
+	i = currentRow
+	j = currentColumn
+	for i >= 0 && j < numOfRows {
+		if board[i][j] == 1 {
+			return false
+		}
+		i--
+		j++
+	}
+
+	return true
+}
+
+func main() {
+	r := solveNQueen(4, 0)
+	if r {
+		for i := 0; i < 4; i++ {
+			fmt.Println(board[i])
+		}
+	}
+}
+
+*/
