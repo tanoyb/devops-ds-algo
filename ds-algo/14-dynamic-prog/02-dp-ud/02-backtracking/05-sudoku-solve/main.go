@@ -72,7 +72,7 @@ func solveSudoku(board [][]int, i, j, n int) bool {
 		}
 	}
 	//if no option works
-	board[i][j] = 0
+	board[i][j] = 0 //backtracking step
 	return false
 }
 
@@ -91,3 +91,89 @@ func main() {
 
 	fmt.Println(solveSudoku(sudokuBoard, 0, 0, 9)) //n==9, is the dimension of the sudoku matrix board
 }
+
+//========================another style solution
+/*
+
+package main
+
+import "fmt"
+
+var sudokuBoard [][]int = [][]int{
+	{5, 3, 0, 0, 7, 0, 0, 0, 0},
+	{6, 0, 0, 1, 9, 5, 0, 0, 0},
+	{0, 9, 8, 0, 0, 0, 0, 6, 0},
+	{8, 0, 0, 0, 6, 0, 0, 0, 3},
+	{4, 0, 0, 8, 0, 3, 0, 0, 1},
+	{7, 0, 0, 0, 2, 0, 0, 0, 6},
+	{0, 6, 0, 0, 0, 0, 2, 8, 0},
+	{0, 0, 0, 4, 1, 9, 0, 0, 5},
+	{0, 0, 0, 0, 8, 0, 0, 7, 9},
+}
+
+func solveSudoku(currentRow, currentColumn, matrixDimention int) bool {
+	//base case will hit when we finish iterating all the rows
+	if currentRow >= matrixDimention {
+		fmt.Println()
+		for i := 0; i < matrixDimention; i++ {
+			fmt.Println(sudokuBoard[i])
+		}
+		return true
+	}
+
+	//recursive case
+	//go to next row if end of a row is reaches
+	if currentColumn > 8 {
+		return solveSudoku(currentRow+1, 0, matrixDimention)
+	}
+	//skip if a position is already filled up
+	if sudokuBoard[currentRow][currentColumn] != 0 {
+		return solveSudoku(currentRow, currentColumn+1, matrixDimention)
+	}
+
+	//cells to be filled, we dont know what wil be the right number on this
+	//so we try all possibilities
+	for number := 1; number <= matrixDimention; number++ {
+		if isSafeToPlaceNumber(number, currentRow, currentColumn) {
+			sudokuBoard[currentRow][currentColumn] = number
+			solveSubgrid := solveSudoku(currentRow, currentColumn+1, matrixDimention)
+			if solveSubgrid {
+				return true
+			}
+
+		}
+	}
+	//if no option work, we need to cal the previous call to check with next number
+	sudokuBoard[currentRow][currentColumn] = 0 //reset
+
+	return false
+}
+
+func isSafeToPlaceNumber(num, i, j int) bool {
+	//check for row and column if the number is present
+	//n is 9 here
+	for k := 0; k < 9; k++ {
+		if sudokuBoard[k][j] == num || sudokuBoard[i][k] == num {
+			return false
+		}
+	}
+	//check the subgrid/nonet if the bumber is alrady present
+	sx := (i / 3) * 3
+	sy := (j / 3) * 3
+	for x := sx; x < sx+3; x++ {
+		for y := sy; y < sy+3; y++ {
+			if sudokuBoard[x][y] == num {
+				return false
+			}
+		}
+	}
+
+	return true
+}
+
+func main() {
+	fmt.Println(solveSudoku(0, 0, 9))
+}
+
+
+*/
