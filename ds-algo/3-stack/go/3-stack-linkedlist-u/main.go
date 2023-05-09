@@ -14,19 +14,6 @@ type StackLinkedList struct {
 	size        int
 }
 
-var top *Node = &Node{next: nil}
-
-func push(n int) {
-	tempNode := &Node{data: n}
-	if (Node{} == *tempNode) {
-		fmt.Println("Stack/heap is full")
-	} else {
-		tempNode.next = top
-		top = tempNode
-	}
-
-}
-
 func (s *StackLinkedList) Size() int {
 	return s.size
 }
@@ -44,8 +31,8 @@ func (s *StackLinkedList) Peek() int {
 }
 
 func (s *StackLinkedList) Push(n int) {
-	tempNode := &Node{data: n}
-	if (Node{} == *tempNode) {
+	tempNode := &Node{data: n} //in case of heap is full, the node creation will fail and tempNode will be nil
+	if (Node{} == *tempNode) { //check if tempNode is empty using Node{} literal
 		fmt.Println("Stack/heap is full")
 	} else {
 		tempNode.next = s.top_or_head
