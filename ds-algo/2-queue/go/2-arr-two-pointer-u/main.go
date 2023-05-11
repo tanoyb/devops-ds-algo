@@ -64,3 +64,63 @@ func main() {
 	queue.dequeue()
 
 }
+
+/*
+package main
+
+import "fmt"
+
+type Queue struct {
+	size  int
+	front int
+	rear  int
+	arr   *[]int
+}
+
+func (q *Queue) enqueue(n int) {
+	if q.rear == q.size-1 {
+		fmt.Println("queue is full")
+	} else {
+		q.rear++
+		(*q.arr)[q.rear] = n
+		fmt.Println("insertted ", n)
+	}
+}
+
+func (q *Queue) dequeue() {
+	if q.front == q.rear {
+		fmt.Println("queue is empty")
+	} else {
+		q.front++
+		x := (*q.arr)[q.front]
+		(*q.arr)[q.front] = 0
+		fmt.Println(x, " removed from queue")
+	}
+}
+
+func main() {
+	s := make([]int, 5)
+	q := &Queue{
+		size:  5,
+		front: -1,
+		rear:  -1,
+		arr:   &s,
+	}
+	q.enqueue(1)
+	q.enqueue(2)
+	q.enqueue(3)
+	q.enqueue(4)
+	q.enqueue(5)
+	q.enqueue(6)
+	fmt.Println("arr = ", (*q.arr), "  front == ", q.front, " rear == ", q.rear)
+	q.dequeue()
+	fmt.Println("arr = ", (*q.arr), "  front == ", q.front, " rear == ", q.rear)
+	q.dequeue()
+	q.dequeue()
+	q.dequeue()
+	q.dequeue()
+	q.dequeue()
+	fmt.Println("arr = ", (*q.arr), "  front == ", q.front, " rear == ", q.rear)
+}
+
+*/
