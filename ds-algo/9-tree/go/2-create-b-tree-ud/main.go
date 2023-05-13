@@ -116,6 +116,26 @@ func postorderDisplay(n *Node) {
 	}
 }
 
+func levelOrderTraversal(root *Node) {
+	if root != nil {
+		initQueue(50)
+		fmt.Println(root.data)
+		queue.enqueue(root)
+		for !queue.isEmpty() {
+			currentRoot := queue.dequeue()
+			if currentRoot.left != nil {
+				fmt.Println(currentRoot.left.data)
+				queue.enqueue(currentRoot.left)
+			}
+			if currentRoot.right != nil {
+				fmt.Println(currentRoot.right.data)
+				queue.enqueue(currentRoot.right)
+			}
+
+		}
+	}
+}
+
 func main() {
 	// initQueue(50)
 	// queue.enqueue(&Node{data: 10})
@@ -139,5 +159,7 @@ func main() {
 	inorderDisplay(root)
 	fmt.Println("post order display")
 	postorderDisplay(root)
+	fmt.Println("level order display")
+	levelOrderTraversal(root)
 
 }
