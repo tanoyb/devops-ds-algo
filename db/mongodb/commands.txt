@@ -1,3 +1,4 @@
+//add macos commands here
 mongosh //starts server
 mongod
 mongo // starts shell terminal
